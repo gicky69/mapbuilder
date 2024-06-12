@@ -2,9 +2,9 @@
 
 para mas mapadali ang ating buhay
 
-0 = Border 
-1 = Grass
-2 = Wall
+0 = Border,
+1 = Grass,
+2 = Wall,
 3 = Door
 
 Inputs:
