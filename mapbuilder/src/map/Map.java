@@ -70,7 +70,7 @@ public class Map {
         int count = 0;
         File file;
         do {
-            String filename = "resources/maps/map" + count + ".txt";
+            String filename = "mapbuilder/resources/maps/map" + count + ".txt";
             file = new File(filename);
             count++;
         } while (file.exists());
