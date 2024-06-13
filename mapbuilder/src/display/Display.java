@@ -1,3 +1,107 @@
+//package display;
+//
+//import entity.Player;
+//import input.KeyInput;
+//import map.Map;
+//import game.Game;
+//
+//import javax.swing.*;
+//import java.awt.*;
+//import java.awt.event.MouseAdapter;
+//import java.awt.event.MouseEvent;
+//import java.awt.event.MouseMotionAdapter;
+//import java.awt.image.BufferStrategy;
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//public class Display extends JFrame {
+//
+//    public Map map;
+//    private Renderer renderer;
+//    public Player player;
+//
+//    public final int screenWidth = 1600;
+//    public final int screenHeight = 1000;
+//
+//    public Display(int swidth, int sheight, KeyInput keyInput) {
+//        setTitle("MTest");
+//        setLayout(null);
+//        setPreferredSize(new Dimension(swidth, sheight));
+//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//
+//        pack();
+//
+//        setBackground(Color.GRAY);
+//        setResizable(false);
+//        setVisible(true);
+//        createBufferStrategy(2);
+//
+//        this.renderer = new Renderer();
+//        map = new Map(this);
+//
+//        addKeyListener(keyInput);
+//        MouseAdapter mouseAdapter = new MouseAdapter() {
+//            @Override
+//            public void mousePressed(MouseEvent e) {
+//                tileClick(e);
+//            }
+//        };
+//
+//        MouseMotionAdapter mouseMotionAdapter = new MouseMotionAdapter() {
+//            @Override
+//            public void mouseDragged(MouseEvent e) {
+//                tileClick(e);
+//            }
+//        };
+//
+//        addMouseListener(mouseAdapter);
+//        addMouseMotionListener(mouseMotionAdapter);
+//        setFocusable(true);
+//        requestFocusInWindow();
+//    }
+//    public void setPlayer(Player player) {
+//        this.player = player;
+//    }
+//
+//    public void render(Game game) {
+//        BufferStrategy bufferStrategy = getBufferStrategy();
+//        Graphics g = bufferStrategy.getDrawGraphics();
+//        Graphics2D g2 = (Graphics2D) g;
+//
+//        g2.clearRect(0, 0, screenWidth, screenHeight);
+//
+//        renderer.renderMap(this, g2);
+//        renderer.render(game, g2, player);
+//
+//        g.dispose();
+//        bufferStrategy.show();
+//    }
+//
+//    public void addTile(MouseEvent e, int tileNum) {
+//        int playerPosX = (int)player.getPosition().getX();
+//        int playerPosY = (int)player.getPosition().getY();
+//
+//        int mouseX = e.getX() + playerPosX;
+//        int mouseY = e.getY() + playerPosY;
+//
+//        // Convert mouse coordinates to tile coordinates
+//        int tileX = mouseX / 40;
+//        int tileY = mouseY / 40;
+//
+//        // Check if there is a tile at the clicked position
+//        System.out.println("Tile clicked at: " + tileX + ", " + tileY);
+//        map.tileMap[tileY][tileX] = tileNum;
+//    }
+//
+//    public void tileClick(MouseEvent e) {
+//        int tileNum = 0;
+//        if (player.lastKeyPressed >= 49 && player.lastKeyPressed <= 57) {
+//            tileNum = player.lastKeyPressed - 48;
+//        }
+//        addTile(e, tileNum);
+//    }
+//}
+
 package display;
 
 import entity.Player;
@@ -9,10 +113,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferStrategy;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Display extends JFrame {
 
@@ -22,6 +123,10 @@ public class Display extends JFrame {
 
     public final int screenWidth = 1600;
     public final int screenHeight = 1000;
+
+    private static final int TILE_SIZE = 40;
+    private static final int KEY_CODE_START = 49;
+    private static final int KEY_CODE_END = 57;
 
     public Display(int swidth, int sheight, KeyInput keyInput) {
         setTitle("MTest");
@@ -45,9 +150,7 @@ public class Display extends JFrame {
             public void mousePressed(MouseEvent e) {
                 tileClick(e);
             }
-        };
 
-        MouseMotionAdapter mouseMotionAdapter = new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
                 tileClick(e);
@@ -55,10 +158,11 @@ public class Display extends JFrame {
         };
 
         addMouseListener(mouseAdapter);
-        addMouseMotionListener(mouseMotionAdapter);
+        addMouseMotionListener(mouseAdapter);
         setFocusable(true);
         requestFocusInWindow();
     }
+
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -85,8 +189,8 @@ public class Display extends JFrame {
         int mouseY = e.getY() + playerPosY;
 
         // Convert mouse coordinates to tile coordinates
-        int tileX = mouseX / 40;
-        int tileY = mouseY / 40;
+        int tileX = mouseX / TILE_SIZE;
+        int tileY = mouseY / TILE_SIZE;
 
         // Check if there is a tile at the clicked position
         System.out.println("Tile clicked at: " + tileX + ", " + tileY);
@@ -95,8 +199,8 @@ public class Display extends JFrame {
 
     public void tileClick(MouseEvent e) {
         int tileNum = 0;
-        if (player.lastKeyPressed >= 49 && player.lastKeyPressed <= 57) {
-            tileNum = player.lastKeyPressed - 48;
+        if (player.lastKeyPressed >= KEY_CODE_START && player.lastKeyPressed <= KEY_CODE_END) {
+            tileNum = player.lastKeyPressed - KEY_CODE_START + 1;
         }
         addTile(e, tileNum);
     }

@@ -9,16 +9,12 @@ import display.Display;
 import entity.GameObject;
 import entity.Player;
 import input.KeyInput;
-import input.MouseInput;
-import map.Map;
 
-import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Game {
     private Display main;
-    private MouseInput mouseInput;
     private KeyInput keyInput;
     private Camera camera;
     private buttonsFrame bFrame;
@@ -27,7 +23,6 @@ public class Game {
 
     public Game(Size windowSize, int width, int height) {
         keyInput = new KeyInput();
-        mouseInput = new MouseInput();
         main = new Display(width, height,  keyInput);
         bFrame = new buttonsFrame(main.map);
 

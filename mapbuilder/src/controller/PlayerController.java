@@ -1,7 +1,6 @@
 package controller;
 
 import input.KeyInput;
-import input.MouseInput;
 
 public class PlayerController implements Controller {
     private KeyInput keyInput;

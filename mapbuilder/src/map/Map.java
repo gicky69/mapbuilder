@@ -5,6 +5,8 @@ import display.Display;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
@@ -30,33 +32,62 @@ public class Map {
         g.fillRect(0,0, 40, 40);
     }
 
-    public void draw(Graphics g2) {
-        int playerPosX = (int)display.player.getPosition().getX();
-        int playerPosY = (int)display.player.getPosition().getY();
-        Point point = new Point();
+//    public void draw(Graphics g2) {
+//        int playerPosX = (int)display.player.getPosition().getX();
+//        int playerPosY = (int)display.player.getPosition().getY();
+//        Point point = new Point();
+//
+//        for (int i = 0; i < 40; i++) {
+//            for (int j = 0; j < 80; j++) {
+//                int worldX = j * 40 - playerPosX;
+//                int worldY = i * 40 - playerPosY;
+//
+//                point.setLocation(worldX, worldY);
+//                clickTiles.add(point);
+//
+//                if (tileMap[i][j] < colors.length) {
+//                    g2.setColor(colors[tileMap[i][j]]);
+//                    switch (tileMap[i][j]) {
+//                        case 1:
+//                            g2.drawRect(worldX, worldY, 40, 40);
+//                            break;
+//                        default:
+//                            g2.fillRect(worldX, worldY, 40, 40);
+//                            break;
+//                    }
+//                }
+//            }
+//        }
+//    }
+public void draw(Graphics g2) {
+    int playerPosX = (int)display.player.getPosition().getX();
+    int playerPosY = (int)display.player.getPosition().getY();
+    Point point = new Point();
 
-        for (int i = 0; i < 40; i++) {
-            for (int j = 0; j < 80; j++) {
-                int worldX = j * 40 - playerPosX;
-                int worldY = i * 40 - playerPosY;
+    Color currentColor = null;
+    for (int i = 0; i < 40; i++) {
+        for (int j = 0; j < 80; j++) {
+            int worldX = j * 40 - playerPosX;
+            int worldY = i * 40 - playerPosY;
 
-                point.setLocation(worldX, worldY);
-                clickTiles.add(point);
+            point.setLocation(worldX, worldY);
+            clickTiles.add(point);
 
-                if (tileMap[i][j] < colors.length) {
-                    g2.setColor(colors[tileMap[i][j]]);
-                    switch (tileMap[i][j]) {
-                        case 1:
-                            g2.drawRect(worldX, worldY, 40, 40);
-                            break;
-                        default:
-                            g2.fillRect(worldX, worldY, 40, 40);
-                            break;
-                    }
+            if (tileMap[i][j] < colors.length) {
+                Color tileColor = colors[tileMap[i][j]];
+                if (!tileColor.equals(currentColor)) {
+                    g2.setColor(tileColor);
+                    currentColor = tileColor;
+                }
+                if (tileMap[i][j] == 1) {
+                    g2.drawRect(worldX, worldY, 40, 40);
+                } else {
+                    g2.fillRect(worldX, worldY, 40, 40);
                 }
             }
         }
     }
+}
 
     public File createMap() {
         int count = 0;
@@ -126,15 +157,13 @@ public class Map {
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
             selectedMap = selectedFile.getPath();
-            try (BufferedReader reader = new BufferedReader(new FileReader(selectedMap))) {
-                String line;
-                int i = 0;
-                while ((line = reader.readLine()) != null) {
-                    String[] values = line.split(" ");
+            try {
+                List<String> lines = Files.readAllLines(Paths.get(selectedMap));
+                for (int i = 0; i < lines.size(); i++) {
+                    String[] values = lines.get(i).split(" ");
                     for (int j = 0; j < values.length; j++) {
                         tileMap[i][j] = Integer.parseInt(values[j]);
                     }
-                    i++;
                 }
             } catch (IOException e) {
                 e.printStackTrace();
