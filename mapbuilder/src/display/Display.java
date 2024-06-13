@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,15 @@ public class Display extends JFrame {
             }
         };
 
+        MouseMotionAdapter mouseMotionAdapter = new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                tileClick(e);
+            }
+        };
+
         addMouseListener(mouseAdapter);
+        addMouseMotionListener(mouseMotionAdapter);
         setFocusable(true);
         requestFocusInWindow();
     }
