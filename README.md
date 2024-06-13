@@ -12,3 +12,8 @@ Inputs:
 Key Inputs para dun sa mga objects, then click lng sa mga points.
 
 Kung may bug chat niyo nlng ako
+
+
+
+< ----------- ! ! ! ! ----------- >
+Create Map muna, if bagong open
