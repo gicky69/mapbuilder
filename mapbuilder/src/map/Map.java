@@ -17,6 +17,7 @@ public class Map {
     public List<Point> clickTiles;
 
     private String selectedMap;
+    Color[] colors = {Color.BLACK, Color.GREEN, Color.BLACK, Color.ORANGE, Color.BLUE, Color.RED, Color.YELLOW, Color.CYAN, Color.MAGENTA, Color.PINK};
 
     public Map(Display display) {
         this.display = display;
@@ -42,25 +43,16 @@ public class Map {
                 point.setLocation(worldX, worldY);
                 clickTiles.add(point);
 
-                switch (tileMap[i][j]) {
-                    case 0:
-                        g2.setColor(Color.BLACK);
-                        g2.fillRect(worldX, worldY, 40, 40);
-                        break;
-                    case 1:
-                        g2.setColor(Color.GREEN);
-                        g2.drawRect(worldX, worldY, 40, 40);
-                        break;
-                    case 2:
-                        g2.setColor(Color.BLACK);
-                        g2.fillRect(worldX, worldY, 40, 40);
-                        break;
-                    case 3:
-                        g2.setColor(Color.ORANGE);
-                        g2.fillRect(worldX, worldY, 40, 40);
-                        break;
-                    default:
-                        break;
+                if (tileMap[i][j] < colors.length) {
+                    g2.setColor(colors[tileMap[i][j]]);
+                    switch (tileMap[i][j]) {
+                        case 1:
+                            g2.drawRect(worldX, worldY, 40, 40);
+                            break;
+                        default:
+                            g2.fillRect(worldX, worldY, 40, 40);
+                            break;
+                    }
                 }
             }
         }
@@ -127,7 +119,7 @@ public class Map {
 
     public void loadMap() {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File("resources/maps"));
+        fileChooser.setCurrentDirectory(new File("mapbuilder"));
         FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
         fileChooser.setFileFilter(filter);
         int returnValue = fileChooser.showOpenDialog(null);

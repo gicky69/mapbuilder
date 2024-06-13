@@ -49,4 +49,9 @@ public class PlayerController implements Controller {
     public boolean clickedFloor() {
         return keyInput.isPressed(51);
     }
+
+    @Override
+    public boolean clickedTiles(int keyCode) {
+        return keyInput.isClicked(keyCode);
+    }
 }

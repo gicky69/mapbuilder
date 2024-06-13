@@ -9,4 +9,5 @@ public interface Controller {
     boolean clickedWall();
     boolean clickedDoor();
     boolean clickedFloor();
+    boolean clickedTiles(int keyCode);
 }

@@ -47,6 +47,11 @@ public class Player extends GameObject {
         if (controller.clickedFloor()) {
             lastKeyPressed = 51;
         }
+        for (int i = 48; i <= 57; i++) {
+            if (controller.clickedTiles(i)) {
+                lastKeyPressed = i;
+            }
+        }
 
 //        System.out.println("Last key pressed: " + lastKeyPressed);
         position = new Position(position.getX() + deltaX, position.getY() + deltaY);

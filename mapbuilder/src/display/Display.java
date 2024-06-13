@@ -94,19 +94,10 @@ public class Display extends JFrame {
     }
 
     public void tileClick(MouseEvent e) {
-        switch(player.lastKeyPressed) {
-            case 49:
-                addTile(e, 1);
-                break;
-            case 50:
-                addTile(e, 2);
-                break;
-            case 51:
-                addTile(e, 3);
-                break;
-            default:
-                addTile(e, 0);
-                break;
+        int tileNum = 0;
+        if (player.lastKeyPressed >= 49 && player.lastKeyPressed <= 57) {
+            tileNum = player.lastKeyPressed - 48;
         }
+        addTile(e, tileNum);
     }
 }
