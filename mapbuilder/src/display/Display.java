@@ -193,7 +193,7 @@ public class Display extends JFrame {
         int tileY = mouseY / TILE_SIZE;
 
         // Check if there is a tile at the clicked position
-        System.out.println("Tile clicked at: " + tileX + ", " + tileY);
+//        System.out.println("Tile clicked at: " + tileX + ", " + tileY);
         map.tileMap[tileY][tileX] = tileNum;
     }
 

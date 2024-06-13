@@ -71,7 +71,7 @@ public void draw(Graphics g2) {
             int worldY = i * 40 - playerPosY;
 
             point.setLocation(worldX, worldY);
-            clickTiles.add(point);
+//            clickTiles.add(point);
 
             if (tileMap[i][j] < colors.length) {
                 Color tileColor = colors[tileMap[i][j]];
