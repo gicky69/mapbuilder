@@ -11,22 +11,22 @@ public class PlayerController implements Controller {
 
     @Override
     public boolean isClickedUp() {
-        return keyInput.isPressed(87);
+        return keyInput.isPressed(38);
     }
 
     @Override
     public boolean isClickedDown() {
-        return keyInput.isPressed(83);
+        return keyInput.isPressed(40);
     }
 
     @Override
     public boolean isClickedLeft() {
-        return keyInput.isPressed(65);
+        return keyInput.isPressed(37);
     }
 
     @Override
     public boolean isClickedRight() {
-        return keyInput.isPressed(68);
+        return keyInput.isPressed(39);
     }
 
     @Override

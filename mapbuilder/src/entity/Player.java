@@ -47,7 +47,7 @@ public class Player extends GameObject {
         if (controller.clickedFloor()) {
             lastKeyPressed = 51;
         }
-        for (int i = 48; i <= 57; i++) {
+        for (int i = 48; i <= 90; i++) {
             if (controller.clickedTiles(i)) {
                 lastKeyPressed = i;
             }

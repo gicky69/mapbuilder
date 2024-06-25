@@ -202,6 +202,11 @@ public class Display extends JFrame {
         if (player.lastKeyPressed >= KEY_CODE_START && player.lastKeyPressed <= KEY_CODE_END) {
             tileNum = player.lastKeyPressed - KEY_CODE_START + 1;
         }
+
+        if (player.lastKeyPressed >= 65 && player.lastKeyPressed <= 90) {
+            System.out.printf("Key pressed: %c\n", player.lastKeyPressed);
+            tileNum = player.lastKeyPressed - 55;
+        }
         addTile(e, tileNum);
     }
 }
