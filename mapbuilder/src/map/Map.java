@@ -19,6 +19,7 @@ public class Map {
     public List<Point> clickTiles;
 
     private String selectedMap;
+
     Color[] colors = {
             Color.BLACK, // 0
             Color.GREEN, // 1
@@ -69,63 +70,36 @@ public class Map {
         g.fillRect(0,0, 40, 40);
     }
 
-//    public void draw(Graphics g2) {
-//        int playerPosX = (int)display.player.getPosition().getX();
-//        int playerPosY = (int)display.player.getPosition().getY();
-//        Point point = new Point();
-//
-//        for (int i = 0; i < 40; i++) {
-//            for (int j = 0; j < 80; j++) {
-//                int worldX = j * 40 - playerPosX;
-//                int worldY = i * 40 - playerPosY;
-//
-//                point.setLocation(worldX, worldY);
-//                clickTiles.add(point);
-//
-//                if (tileMap[i][j] < colors.length) {
-//                    g2.setColor(colors[tileMap[i][j]]);
-//                    switch (tileMap[i][j]) {
-//                        case 1:
-//                            g2.drawRect(worldX, worldY, 40, 40);
-//                            break;
-//                        default:
-//                            g2.fillRect(worldX, worldY, 40, 40);
-//                            break;
-//                    }
-//                }
-//            }
-//        }
-//    }
-public void draw(Graphics g2) {
-    int playerPosX = (int)display.player.getPosition().getX();
-    int playerPosY = (int)display.player.getPosition().getY();
-    Point point = new Point();
+    public void draw(Graphics g2) {
+        int playerPosX = (int)display.player.getPosition().getX();
+        int playerPosY = (int)display.player.getPosition().getY();
+        Point point = new Point();
 
-    Color currentColor = null;
-    for (int i = 0; i < 40; i++) {
-        for (int j = 0; j < 80; j++) {
-            int worldX = j * 40 - playerPosX;
-            int worldY = i * 40 - playerPosY;
+        Color currentColor = null;
+        for (int i = 0; i < 40; i++) {
+            for (int j = 0; j < 80; j++) {
+                int worldX = j * 40 - playerPosX;
+                int worldY = i * 40 - playerPosY;
 
-            point.setLocation(worldX, worldY);
-//            clickTiles.add(point);
+                point.setLocation(worldX, worldY);
+    //            clickTiles.add(point);
 
-            if (tileMap[i][j] < colors.length) {
-                System.out.println("Tile: " + tileMap[0][0]);
-                Color tileColor = colors[tileMap[i][j]];
-                if (!tileColor.equals(currentColor)) {
-                    g2.setColor(tileColor);
-                    currentColor = tileColor;
-                }
-                if (tileMap[i][j] == 1) {
-                    g2.drawRect(worldX, worldY, 40, 40);
-                } else {
-                    g2.fillRect(worldX, worldY, 40, 40);
+                if (tileMap[i][j] < colors.length) {
+//                    System.out.println("Tile: " + tileMap[0][0]);
+                    Color tileColor = colors[tileMap[i][j]];
+                    if (!tileColor.equals(currentColor)) {
+                        g2.setColor(tileColor);
+                        currentColor = tileColor;
+                    }
+                    if (tileMap[i][j] == 1) {
+                        g2.drawRect(worldX, worldY, 40, 40);
+                    } else {
+                        g2.fillRect(worldX, worldY, 40, 40);
+                    }
                 }
             }
         }
     }
-}
 
     public File createMap() {
         int count = 0;

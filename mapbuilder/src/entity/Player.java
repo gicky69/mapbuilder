@@ -8,6 +8,7 @@ public class Player extends GameObject {
     private Controller controller;
 
     public int lastKeyPressed = 0;
+    public int assetNum = 0;
 
     public Player(Position pos, Controller controller)  {
         super();
@@ -47,11 +48,17 @@ public class Player extends GameObject {
         if (controller.clickedFloor()) {
             lastKeyPressed = 51;
         }
-        for (int i = 48; i <= 90; i++) {
+        for (int i = 48; i <= 105; i++) {
             if (controller.clickedTiles(i)) {
                 lastKeyPressed = i;
+                if (lastKeyPressed >= 96 && lastKeyPressed <= 105) {
+                    assetNum = lastKeyPressed - 96;
+                }
             }
         }
+
+        System.out.println("Tile clicked: " + lastKeyPressed);
+        System.out.println("Asset number: " + assetNum);
 
 //        System.out.println("Last key pressed: " + lastKeyPressed);
         position = new Position(position.getX() + deltaX, position.getY() + deltaY);

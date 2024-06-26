@@ -128,6 +128,9 @@ public class Display extends JFrame {
     private static final int KEY_CODE_START = 49;
     private static final int KEY_CODE_END = 57;
 
+    // Asset Checker
+    private int selectedASSET = 0;
+
     public Display(int swidth, int sheight, KeyInput keyInput) {
         setTitle("MTest");
         setLayout(null);
@@ -199,14 +202,19 @@ public class Display extends JFrame {
 
     public void tileClick(MouseEvent e) {
         int tileNum = 0;
+
+
+        int offset = selectedASSET * 10;
+
         if (player.lastKeyPressed >= KEY_CODE_START && player.lastKeyPressed <= KEY_CODE_END) {
-            tileNum = player.lastKeyPressed - KEY_CODE_START + 1;
+            tileNum = (player.lastKeyPressed - KEY_CODE_START + 1) + offset;
         }
 
         if (player.lastKeyPressed >= 65 && player.lastKeyPressed <= 90) {
             System.out.printf("Key pressed: %c\n", player.lastKeyPressed);
-            tileNum = player.lastKeyPressed - 55;
+            tileNum = (player.lastKeyPressed - 55) + offset;
         }
+
         addTile(e, tileNum);
     }
 }
